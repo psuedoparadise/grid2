@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_doctor"
+            android:icon="@drawable/ic_menu_send"
+            android:title="doctor" />
+        <item
+            android:id="@+id/nav_pharmacy"
+            android:icon="@drawable/ic_menu_send"
+            android:title="pharmacy" />
+        <item
+            android:id="@+id/nav_pathology"
+            android:icon="@drawable/ic_menu_send"
+            android:title="pathology" />
+        <item
+            android:id="@+id/nav_ambulance"
+            android:icon="@drawable/ic_menu_send"
+            android:title="ambulance" />
+        <item
+            android:id="@+id/nav_blood"
+            android:icon="@drawable/ic_menu_send"
+            android:title="blood bank" />
+
+
+
+    </group>
+
+
+</menu>
