@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 
 
 public class androidgridlayoutactivity extends Activity {
@@ -16,6 +17,7 @@ public class androidgridlayoutactivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.grid_layout);
         GridView gridView = (GridView) findViewById(R.id.grid_view);
+        //LinearLayout linearLayout=(LinearLayout) findViewById(R.id.linear);
 
         // Instance of ImageAdapter Class
         gridView.setAdapter(new ImageAdapter(this));
@@ -25,10 +27,46 @@ public class androidgridlayoutactivity extends Activity {
                                     int position, long id) {
 
                 // Sending image id to FullScreenActivity
-                Intent i = new Intent(getApplicationContext(), MapsActivity.class);
+
+                 Intent intent=null ;
                 // passing array index
-                i.putExtra("id", position);
-                startActivity(i);
+
+                switch(position)
+                {
+                    case 0:
+                        intent =  new Intent(getApplicationContext(),MapsActivity.class);
+                        break;
+
+                    case 1:
+                        intent =  new Intent(getApplicationContext(), MapsActivity.class);
+                        break;
+                    case 2:
+                        intent =  new Intent(getApplicationContext(), MapsActivity.class);
+                        break;
+                    case 3:
+                        intent =  new Intent(getApplicationContext(), MapsActivity.class);
+                        break;
+                    case 4:
+                        intent =  new Intent(getApplicationContext(), MapsActivity.class);
+                        break;
+                    case 5:
+                        intent =  new Intent(getApplicationContext(), MapsActivity.class);
+                        break;
+                    case 6:
+                        intent =  new Intent(getApplicationContext(), MapsActivity.class);
+                        break;
+                    case 7:
+                        intent =  new Intent(getApplicationContext(), MapsActivity.class);
+                        break;
+
+
+
+
+
+
+
+                }
+                startActivity(intent);
             }
         });
 

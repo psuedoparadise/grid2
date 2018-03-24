@@ -33,7 +33,7 @@ public class pharmacy extends Fragment {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent toy = new Intent(getActivity(), androidgridlayoutactivity.class);
+                Intent toy = new Intent(getActivity(), MapsActivity.class);
 
                 startActivity(toy);
 
