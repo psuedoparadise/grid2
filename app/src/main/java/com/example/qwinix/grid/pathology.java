@@ -29,18 +29,14 @@ public class pathology extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View rootView= inflater.inflate(R.layout.pathology, container, false);
            Intent toy2 = new Intent(getActivity(), MapsActivity.class);
+        toy2.putExtra("KEY_BONE","pathology");
 
         startActivity(toy2);
 
         return rootView;
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        //you can set the title for your toolbar here for different fragments different titles
-        getActivity().setTitle("pathology");
-    }
+
 }
 
 

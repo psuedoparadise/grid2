@@ -37,13 +37,14 @@
             android:hint="username" />
 
         <EditText
+            android:id="@+id/addr"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp"
-            android:maxLines="1"
             android:background="@drawable/edittextstyle"
-            android:hint="address" />
+            android:hint="address"
+            android:maxLines="1" />
 
         <EditText
             android:id="@+id/editTextEmail1"

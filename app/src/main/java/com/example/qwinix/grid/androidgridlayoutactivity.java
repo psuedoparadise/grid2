@@ -3,6 +3,7 @@ package com.example.qwinix.grid;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -25,38 +26,74 @@ public class androidgridlayoutactivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
+              /*.d("---i","pos"+position);
+                Intent intent;
+                intent =  new Intent(androidgridlayoutactivity.this,MapsActivity.class);
+                Log.d("---i","pos");
+                intent.putExtra("KEY_BONE","bone");
+                startActivity(intent);*/
+        // Sending image id to FullScreenActivity
 
-                // Sending image id to FullScreenActivity
 
                  Intent intent=null ;
+
                 // passing array index
 
                 switch(position)
                 {
                     case 0:
-                        intent =  new Intent(getApplicationContext(),MapsActivity.class);
+                        intent= new Intent(v.getContext(),MapsActivity.class);
+                        Log.d("---i","pos");
+                        intent.putExtra("KEY_BONE","bone");
+                        startActivity(intent);
+
                         break;
 
                     case 1:
-                        intent =  new Intent(getApplicationContext(), MapsActivity.class);
+                        intent =  new Intent(v.getContext(), MapsActivity.class);
+                        Log.d("---i","pos1");
+                        intent.putExtra("KEY_BONE","DBC");
+                        startActivity(intent);
+
                         break;
                     case 2:
-                        intent =  new Intent(getApplicationContext(), MapsActivity.class);
+                        intent =  new Intent(v.getContext(), MapsActivity.class);
+                        Log.d("---i","pos2");
+                        intent.putExtra("KEY_BONE","gyno");
+                        startActivity(intent);
                         break;
                     case 3:
-                        intent =  new Intent(getApplicationContext(), MapsActivity.class);
+                        intent =  new Intent(v.getContext(), MapsActivity.class);
+                        Log.d("---i","pos3");
+                        intent.putExtra("KEY_BONE","general");
+                        startActivity(intent);
                         break;
                     case 4:
-                        intent =  new Intent(getApplicationContext(), MapsActivity.class);
+                        intent =  new Intent(v.getContext(), MapsActivity.class);
+                        Log.d("---i","pos4");
+                        intent.putExtra("KEY_BONE","neuro");
+                        startActivity(intent);
                         break;
                     case 5:
-                        intent =  new Intent(getApplicationContext(), MapsActivity.class);
+                        intent =  new Intent(v.getContext(), MapsActivity.class);
+                        Log.d("---i","pos5");
+                        intent.putExtra("KEY_BONE","derma");
+                        startActivity(intent);
+
                         break;
                     case 6:
-                        intent =  new Intent(getApplicationContext(), MapsActivity.class);
+                        intent =  new Intent(v.getContext(), MapsActivity.class);
+                        Log.d("---i","pos6");
+                        intent.putExtra("KEY_BONE","pedia");
+                        startActivity(intent);
+
                         break;
                     case 7:
-                        intent =  new Intent(getApplicationContext(), MapsActivity.class);
+                        intent =  new Intent(v.getContext(), MapsActivity.class);
+                        Log.d("---i","pos7");
+                        intent.putExtra("KEY_BONE","cardio");
+                        startActivity(intent);
+
                         break;
 
 
@@ -66,7 +103,8 @@ public class androidgridlayoutactivity extends Activity {
 
 
                 }
-                startActivity(intent);
+
+
             }
         });
 

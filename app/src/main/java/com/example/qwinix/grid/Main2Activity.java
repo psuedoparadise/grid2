@@ -7,8 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 
 public class Main2Activity extends AppCompatActivity {
@@ -23,7 +21,7 @@ public class Main2Activity extends AppCompatActivity {
         but1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent toy = new Intent(Main2Activity.this, MainActivity.class);
+                Intent toy = new Intent(Main2Activity.this, ServiceproviderActivity.class);
                 startActivity(toy);
 
             }

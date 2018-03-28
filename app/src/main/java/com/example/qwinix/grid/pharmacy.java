@@ -27,43 +27,14 @@ public class pharmacy extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
 
-        final View rootView=inflater.inflate(R.layout.pharmacy,container,false);
-        button1 = (Button) rootView.findViewById(R.id.button);
+        final View rootView= inflater.inflate(R.layout.pharmacy, container, false);
+        Intent toy2 = new Intent(getActivity(), MapsActivity.class);
+        toy2.putExtra("KEY_BONE","pharmacy");
+        startActivity(toy2);
 
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent toy = new Intent(getActivity(), MapsActivity.class);
-
-                startActivity(toy);
-
-            }
-        });
-        button2 = (Button) rootView.findViewById(R.id.button2);
-
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent toy = new Intent(getActivity(), MapsActivity.class);
-
-                startActivity(toy);
-
-            }
-        });
-
-
-        button3 = (Button) rootView.findViewById(R.id.button3);
-
-        button3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent toy = new Intent(getActivity(), MapsActivity.class);
-
-                startActivity(toy);
-
-            }
-        });
         return rootView;
+    }
 
 
-    }}
+
+}
