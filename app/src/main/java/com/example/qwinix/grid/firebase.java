@@ -38,7 +38,7 @@ public class firebase extends AppCompatActivity implements View.OnClickListener 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.firebasestorage);
+            setContentView(R.layout.activity_firebase2);
 
             storageReference = FirebaseStorage.getInstance().getReference();
 

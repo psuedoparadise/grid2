@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         tools:layout_editor_absoluteX="96dp"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteY="0dp"
+        tools:ignore="MissingConstraints">
 
         <Button
             android:id="@+id/buttonChoose"
@@ -37,5 +38,6 @@
         android:paddingTop="70dp"
         android:layout_below="@id/linearLayout"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        tools:layout_editor_absoluteY="0dp"
+        tools:ignore="MissingConstraints" />
 </android.support.constraint.ConstraintLayout>
