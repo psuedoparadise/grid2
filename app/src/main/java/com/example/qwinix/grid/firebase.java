@@ -25,7 +25,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.IOException;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class firebase extends AppCompatActivity implements View.OnClickListener {
 
 
         private static final int PICK_IMAGE_REQUEST = 234;

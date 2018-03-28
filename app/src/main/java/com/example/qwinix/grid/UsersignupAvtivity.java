@@ -122,7 +122,7 @@ import com.google.firebase.database.FirebaseDatabase;
                             }
                             progressDialog.dismiss();
                             addUser();
-                            Intent toy2 = new Intent(getApplication(), MainActivity.class);
+                            Intent toy2 = new Intent(getApplication(), firebase.class);
 
                             startActivity(toy2);
                         }
