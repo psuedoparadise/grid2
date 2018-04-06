@@ -42,6 +42,7 @@ public class doctor extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent toy = new Intent(getActivity(), MapsActivity.class);
+                toy.putExtra("KEY_BONE","doctor1");
 
                 startActivity(toy);
 
@@ -55,7 +56,7 @@ public class doctor extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent toy = new Intent(getActivity(), MapsActivity.class);
-
+                toy.putExtra("KEY_BONE","doctor2");
                 startActivity(toy);
 
             }

@@ -39,6 +39,7 @@
             android:name=".androidgridlayoutactivity"
             android:label="map" />
         <activity android:name=".MapsActivity" />
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".Main2Activity"
             android:label="login page"
@@ -58,6 +59,7 @@
             android:label="service provider"
             tools:ignore="DuplicateActivity" />
         <activity android:name=".firebase" />
+        <activity android:name=".Firebase" />
     </application>
 
 </manifest>

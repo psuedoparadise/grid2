@@ -1,8 +1,8 @@
 package com.example.qwinix.grid;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.support.v4.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.content.Intent;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //setSupportActionBar(toolbar);
 
 
 
@@ -76,10 +77,10 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
     private void displaySelectedScreen(int id) {
+        Fragment fragment=null;
 
 
         //creating fragment object
-        android.support.v4.app.Fragment fragment = null;
 
         //initializing the fragment object which is selected
         switch (id) {
@@ -87,16 +88,26 @@ public class MainActivity extends AppCompatActivity
                 fragment = new doctor();
                 break;
             case R.id.nav_pharmacy:
-                fragment = new pharmacy();
+              Intent fromPharmacy = new Intent(MainActivity.this,MapsActivity.class);
+              fromPharmacy.putExtra("KEY_BONE","pharmacy");
+              startActivity(fromPharmacy);
+                //fragment = new pharmacy();
                 break;
             case R.id.nav_pathology:
-                fragment=new pathology();
+                //fragment=new pathology();
+                Intent toy2=new Intent(MainActivity.this,MapsActivity.class);
+                toy2.putExtra("KEY_BONE","pathology");
+                startActivity(toy2);
                 break;
             case R.id.nav_ambulance:
-                fragment= new ambulance();
+                //fragment= new ambulance();
+                Intent fromAmbulance = new Intent(MainActivity.this,MapsActivity.class);
+                fromAmbulance.putExtra("KEY_BONE","ambulance");
+                startActivity(fromAmbulance);
+
                 break;
             case R.id.nav_blood:
-                fragment= new blood();
+                //fragment= new blood();
                 break;
 
 

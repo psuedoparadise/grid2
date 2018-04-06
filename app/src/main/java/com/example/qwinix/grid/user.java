@@ -9,16 +9,21 @@ public class user {
 
         String username;
         String userph;
+        String email;
+        String password;
 
 
         public user() {
 
         }
 
-        public user(String username, String userph) {
+        public user(String username, String userph,String email,
+                String password) {
 
             this.username = username;
             this.userph = userph;
+            this.email = email;
+            this.password = password;
 
         }
 
@@ -31,9 +36,17 @@ public class user {
         public String getuserph() {
             return userph;
         }
-
-
+    public String getemail() {
+        return email;
     }
+
+    public String getpassword() {
+        return password;
+    }
+
+
+
+}
 
 
 

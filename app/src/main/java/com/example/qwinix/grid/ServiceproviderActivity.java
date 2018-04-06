@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 
 import android.widget.Button;
@@ -20,15 +21,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 public class ServiceproviderActivity extends AppCompatActivity {
-    /*Spinner spinner1;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        spinner1 = (Spinner) findViewById(R.id.spinner1);
-    }*/
+
     Spinner spinner1;
     private EditText editTextEmail;
     private EditText editTextPassword;
@@ -42,36 +40,73 @@ public class ServiceproviderActivity extends AppCompatActivity {
     DatabaseReference databaseUsers;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_serviceprovider);
 
         spinner1 = (Spinner) findViewById(R.id.spinner1);
 
-//
-        databaseUsers = FirebaseDatabase.getInstance().getReference("serviceproviders");
+        databaseUsers = FirebaseDatabase.getInstance().getReference("ServiceProviderInformation");
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        editTextEmail = (EditText) findViewById(R.id.editTextEmail);
-        editTextPassword = (EditText) findViewById(R.id.editTextPassword);
-        usrname=(EditText) findViewById(R.id.usrname);
-        phno=(EditText) findViewById(R.id.phno);
-        addr = (EditText) findViewById(R.id.addr);
+        editTextEmail = (EditText) findViewById(R.id.editTextEmail1);
+        editTextPassword = (EditText) findViewById(R.id.editTextPassword1);
+        usrname=(EditText) findViewById(R.id.spname);
+        phno=(EditText) findViewById(R.id.spphno);
+        addr = (EditText) findViewById(R.id.spaddress);
 
         but1 = (Button) findViewById(R.id.buttonsp);
         progressDialog = new ProgressDialog(this);
 
 
-
         but1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                registerUser();
+
+                String validemail = "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
+
+                        "\\@" +
+
+                        "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+
+                        "(" +
+
+                        "\\." +
+
+                        "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+
+                        ")+";
+
+
+                String email = editTextEmail.getText().toString();
+
+                Matcher matcher= Pattern.compile(validemail).matcher(email);
+
+
+                if (matcher.matches()){
+                    //Toast.makeText(getApplicationContext(),"True",Toast.LENGTH_LONG).show();
+                    //return true;
+                }
+                else {
+                    //Toast.makeText(getApplicationContext(),"Enter Valid Email-Id",Toast.LENGTH_LONG).show();
+                    //return false;
+                }
+                String phn = phno.getText().toString();
+
+                if(isValidMobile(phn)){
+
+                    registerUser();
+
+                }else{
+                    Toast.makeText(ServiceproviderActivity.this,"InvalidUser",Toast.LENGTH_LONG).show();
+                }
+
+
             }
         });
+
         //attaching listener to button
         init();
     }
@@ -115,8 +150,6 @@ public class ServiceproviderActivity extends AppCompatActivity {
 
         }
 
-
-
         //if the email and password are not empty
         //displaying a progress dialog
 
@@ -125,19 +158,16 @@ public class ServiceproviderActivity extends AppCompatActivity {
 
         //creating a new serviceproviders
         firebaseAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(ServiceproviderActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         //checking if success
                         if (task.isSuccessful()) {
                             //display some message here
                             Toast.makeText(ServiceproviderActivity.this, "Successfully registered", Toast.LENGTH_LONG).show();
-
                             addUser();
-                            Intent toy2 = new Intent(ServiceproviderActivity.this, ServiceproviderActivity.class);
-
+                            Intent toy2 = new Intent(ServiceproviderActivity.this, Main2Activity.class);
                             startActivity(toy2);
-
                         } else {
                             //display some message here
                             Toast.makeText(ServiceproviderActivity.this, "Registration Error", Toast.LENGTH_LONG).show();
@@ -146,16 +176,14 @@ public class ServiceproviderActivity extends AppCompatActivity {
 
                     }
                 });
-
     }
-
 
     private void init() {
         but2 = (Button) findViewById(R.id.button);
         but2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent toy = new Intent(ServiceproviderActivity.this, firebase.class);
+                Intent toy = new Intent(ServiceproviderActivity.this, Firebase.class);
                 startActivity(toy);
             }
         });
@@ -163,43 +191,36 @@ public class ServiceproviderActivity extends AppCompatActivity {
 
     private void addUser() {
 
-        String name = usrname.getText().toString().trim();
-        String phn = phno.getText().toString().trim();
-        String address = usrname.getText().toString().trim();
-        String spinner =spinner1.getSelectedItem().toString().trim();
-        String email = editTextEmail.getText().toString().trim();
+        String Username = usrname.getText().toString().trim();
+        String Phonenumber = phno.getText().toString().trim();
+        String Address = usrname.getText().toString().trim();
+        String Spinner =spinner1.getSelectedItem().toString().trim();
+        String Email = editTextEmail.getText().toString().trim();
+        String Password = editTextPassword.getText().toString().trim();
 
-
-
-        if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(phn) && !TextUtils.isEmpty(address)) {
+        if (!TextUtils.isEmpty(Username) && !TextUtils.isEmpty(Phonenumber) && !TextUtils.isEmpty(Address)) {
 
             String id = databaseUsers.push().getKey();
 
-            serviceproviders serviceproviders = new serviceproviders(name, phn, address,spinner,email);
+            ServiceProviderInformation serviceproviders = new ServiceProviderInformation(Username, Address,Email, Password, Phonenumber, Spinner );
 
             databaseUsers.child(id).setValue(serviceproviders);
-
-
-            //  Toast.makeText(this, "Artist added", Toast.LENGTH_LONG).show();
-
         }
-
-//        else if(TextUtils.isEmpty(name)){
-//            //if the value is not given displaying a toast
-//
-//            Toast.makeText(this, "Please enter a name", Toast.LENGTH_LONG).show();
-//            return;
-//        }
-//
-//        else {
-//            Toast.makeText(this, "Please enter phone no", Toast.LENGTH_LONG).show();
-//            return;
-//
-//
-//        }
-
-
-
     }
 
+    public static boolean isValidMobile(String phone) {
+        boolean check = false;
+        if (!Pattern.matches("[a-zA-Z]+", phone)) {
+            if (phone.length() < 11 || phone.length() > 13) {
+                // if(phone.length() != 10) {
+                check = false;
+                // txtPhone.setError("Not Valid Number");
+            } else {
+                check = android.util.Patterns.PHONE.matcher(phone).matches();
+            }
+        } else {
+            check = false;
+        }
+        return check;
+    }
 }

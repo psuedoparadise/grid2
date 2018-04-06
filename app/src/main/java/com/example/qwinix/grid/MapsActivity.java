@@ -1,4 +1,5 @@
 package com.example.qwinix.grid;
+
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -24,6 +25,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.qwinix.grid.GetNearbyPlacesData;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -83,8 +85,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         //GridView gridView = (GridView) findViewById(R.id.grid_view);
-        mSearchText = (EditText) findViewById(R.id.input_search);
-        mGps = (ImageView) findViewById(R.id.ic_gps);
+       // mSearchText = (EditText) findViewById(R.id.input_search);
+        //mGps = (ImageView) findViewById(R.id.ic_gps);
         getDeviceLocation();
         Intent intent=getIntent();
         tabName=   intent.getStringExtra("KEY_BONE");
@@ -396,59 +398,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.setMyLocationEnabled(true);
         }
 
-        Button btnHospital = (Button) findViewById(R.id.btnHospital);
-        btnHospital.setOnClickListener(new View.OnClickListener() {
-            String Hospital = "hospital";
-            @Override
-            public void onClick(View v) {
-                Log.d("onClick", "Button is Clicked");
-                mMap.clear();
-                String url = getUrl(latitude, longitude, Hospital);
-                Object[] DataTransfer = new Object[2];
-                DataTransfer[0] = mMap;
-                DataTransfer[1] = url;
-                Log.d("onClick", url);
-                GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
-                getNearbyPlacesData.execute(DataTransfer);
-                Toast.makeText(MapsActivity.this,"Nearby Hospitals", Toast.LENGTH_LONG).show();
-            }
-        });
-        Button btnpharmacy = (Button) findViewById(R.id.btnpHARMACY);
-        btnpharmacy.setOnClickListener(new View.OnClickListener() {
-            String pharmacy = "pharmacy";
-            @Override
-            public void onClick(View v) {
-                Log.d("onClick", "Button is Clicked");
-                mMap.clear();
-                String url = getUrl(latitude, longitude, pharmacy);
-                Object[] DataTransfer = new Object[2];
-                DataTransfer[0] = mMap;
-                DataTransfer[1] = url;
-                Log.d("onClick", url);
-                GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
-                getNearbyPlacesData.execute(DataTransfer);
-                Toast.makeText(MapsActivity.this,"Nearby pharmacy", Toast.LENGTH_LONG).show();
-            }
-        });
-
-        btnambulance = (Button) findViewById(R.id.btnambulance);
-        btnambulance.setOnClickListener(new View.OnClickListener() {
-            String Hospital = "hospital";
-            @Override
-            public void onClick(View v) {
-                Log.d("onClick", "Button is Clicked");
-                mMap.clear();
-                String url = getUrl(latitude, longitude, Hospital);
-                Object[] DataTransfer = new Object[2];
-                DataTransfer[0] = mMap;
-                DataTransfer[1] = url;
-                Log.d("onClick", url);
-                GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
-                getNearbyPlacesData.execute(DataTransfer);
-                Toast.makeText(MapsActivity.this,"Nearby ambulance", Toast.LENGTH_LONG).show();
-            }
-        });
-
 
 
         mpathology.setOnClickListener(new View.OnClickListener() {
@@ -492,9 +441,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 if (marker.getTitle().equalsIgnoreCase(mModel.get(j).getTitle())) {
                                     mText.setText(mModel.get(j).getReview());
                                     mDetail.setVisibility(View.VISIBLE);
+                                    //   Toast.makeText(MapsActivity.this, "Positi J", Toast.LENGTH_LONG).show();
                                     break;
                                 }
                             }
+
 
                             Toast.makeText(MapsActivity.this, "position" + marker.getTitle(), Toast.LENGTH_LONG).show();
                             return false;
@@ -509,8 +460,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
-       // setTab(tabName,latitude,longitude);
-      //  init();
+        // setTab(tabName,latitude,longitude);
+        //  init();
     }
 
     private void init() {
@@ -781,7 +732,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 10000;
     public boolean checkLocationPermission(){
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
@@ -979,7 +930,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
                     //move map camera
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(mLoca.get(i)));
-                    mMap.animateCamera(CameraUpdateFactory.zoomTo(20));
+                    mMap.animateCamera(CameraUpdateFactory.zoomTo(50));
                 }
                 break;
             case "pharmacy" :
@@ -992,7 +943,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 getNearbyPlacesData = new GetNearbyPlacesData();
                 getNearbyPlacesData.execute(DataTransfer);
                 Toast.makeText(MapsActivity.this,"Nearby pharmacy", Toast.LENGTH_LONG).show();
-break;
+                break;
 
             case "ambulance" :
                 mMap.clear();
@@ -1004,6 +955,30 @@ break;
                 getNearbyPlacesData = new GetNearbyPlacesData();
                 getNearbyPlacesData.execute(DataTransfer);
                 break;
+
+            case "doctor1" :
+                mMap.clear();
+                url = getUrl(lat, longtidue1, "hospital");
+                DataTransfer = new Object[2];
+                DataTransfer[0] = mMap;
+                DataTransfer[1] = url;
+                Log.d("---onClick", url);
+                getNearbyPlacesData = new GetNearbyPlacesData();
+                getNearbyPlacesData.execute(DataTransfer);
+                break;
+
+            case "doctor2" :
+                mMap.clear();
+                url = getUrl(lat, longtidue1, "hospital");
+                DataTransfer = new Object[2];
+                DataTransfer[0] = mMap;
+                DataTransfer[1] = url;
+                Log.d("---onClick", url);
+                getNearbyPlacesData = new GetNearbyPlacesData();
+                getNearbyPlacesData.execute(DataTransfer);
+                break;
+
+
 
         }
     }

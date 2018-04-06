@@ -28,8 +28,9 @@
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/spname"
             android:layout_width="300dp"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp"
             android:maxLines="1"
@@ -37,39 +38,48 @@
             android:hint="username" />
 
         <EditText
-            android:id="@+id/addr"
+            android:id="@+id/spaddress"
             android:layout_width="300dp"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp"
             android:background="@drawable/edittextstyle"
             android:hint="address"
-            android:maxLines="1" />
+             />
 
         <EditText
             android:id="@+id/editTextEmail1"
             android:layout_width="300dp"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp"
             android:maxLines="1"
             android:background="@drawable/edittextstyle"
             android:hint="email_id" />
 
-        <EditText
-            android:id="@+id/editTextPassword1"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:maxLines="1"
-            android:background="@drawable/edittextstyle"
-            android:hint="password" />
+        <android.support.design.widget.TextInputLayout
 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true">
 
+            <android.support.design.widget.TextInputEditText
+
+                android:id="@+id/editTextPassword1"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:maxLines="1"
+                android:background="@drawable/edittextstyle"
+                android:hint="password"
+                android:inputType="textPassword" />
+
+        </android.support.design.widget.TextInputLayout>
         <EditText
+            android:id="@+id/spphno"
             android:layout_width="300dp"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp"
             android:maxLines="1"
@@ -93,16 +103,20 @@
             android:entries="@array/category" />
 
         <TextView
+            android:id="@+id/uploadtxt"
             android:layout_width="300dp"
             android:layout_height="20dp"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="20dp"
+
+            android:layout_marginLeft="20dp"
             android:text="Upload your certifications" />
 
         <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="0.5dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp"
             android:text="upload"
             android:textSize="18sp" />
 
