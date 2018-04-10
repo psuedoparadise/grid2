@@ -6,56 +6,65 @@
     android:layout_height="match_parent"
     tools:context="com.example.qwinix.grid.ServiceproviderActivity">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Button" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="@dimen/activity_horizontal_margin">
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="7dp"
-            android:text="Sign Up"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+
 
         <EditText
             android:id="@+id/spname"
             android:layout_width="300dp"
-            android:layout_height="60dp"
+            android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp"
             android:maxLines="1"
             android:background="@drawable/edittextstyle"
-            android:hint="username" />
-
-        <EditText
-            android:id="@+id/spaddress"
-            android:layout_width="300dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/edittextstyle"
-            android:hint="address"
-             />
+            android:hint="username"
+            android:paddingTop="5dp"/>
 
         <EditText
             android:id="@+id/editTextEmail1"
             android:layout_width="300dp"
-            android:layout_height="60dp"
+            android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp"
             android:maxLines="1"
             android:background="@drawable/edittextstyle"
-            android:hint="email_id" />
+            android:hint="email_id"
+            android:paddingTop="5dp"/>
+
+
+        <EditText
+            android:id="@+id/spaddress"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/edittextstyle"
+            android:hint="address"
+            android:paddingTop="5dp"/>
+
+        <EditText android:id="@+id/category"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/buttonstyle"
+            android:hint="category"
+            android:paddingTop="5dp"/>
+        <EditText android:id="@+id/sub_category"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/buttonstyle"
+            android:hint="sub-category"
+            android:paddingTop="5dp"/>
 
         <android.support.design.widget.TextInputLayout
 
@@ -67,24 +76,26 @@
 
                 android:id="@+id/editTextPassword1"
                 android:layout_width="300dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="30dp"
                 android:maxLines="1"
                 android:background="@drawable/edittextstyle"
                 android:hint="password"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:paddingTop="5dp"/>
 
         </android.support.design.widget.TextInputLayout>
         <EditText
             android:id="@+id/spphno"
             android:layout_width="300dp"
-            android:layout_height="60dp"
+            android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp"
             android:maxLines="1"
             android:background="@drawable/edittextstyle"
-            android:hint="phone no" />
+            android:hint="phone no"
+            android:paddingTop="5dp"/>
 
         <TextView
             android:layout_width="300dp"
@@ -92,7 +103,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp"
             android:text="Select Category"
-            android:textSize="10dp" />
+            android:textSize="5dp" />
 
         <Spinner
             android:id="@+id/spinner1"
@@ -100,7 +111,8 @@
             android:layout_height="20dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="5dp"
-            android:entries="@array/category" />
+            android:entries="@array/category"
+            android:paddingTop="5dp"/>
 
         <TextView
             android:id="@+id/uploadtxt"
@@ -109,26 +121,29 @@
             android:layout_marginTop="20dp"
 
             android:layout_marginLeft="20dp"
-            android:text="Upload your certifications" />
+            android:text="Upload your certifications"
+            android:paddingTop="5dp"/>
 
         <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_marginTop="8dp"
             android:layout_marginLeft="8dp"
             android:text="upload"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:paddingTop="5dp"/>
 
 
         <Button
             android:id="@+id/buttonsp"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="30dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="1dp"
             android:background="@drawable/buttonstyle"
-            android:text="Sign Up" />
+            android:text="Sign Up"
+            android:paddingTop="5dp"/>
 
     </LinearLayout>
 </LinearLayout>

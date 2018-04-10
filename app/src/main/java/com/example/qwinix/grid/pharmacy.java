@@ -5,7 +5,9 @@ package com.example.qwinix.grid;
  */
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -19,10 +21,7 @@ import android.widget.Button;
  */
 
 public class pharmacy extends Fragment {
-    public Button button1;
-    public Button button2;
-    public Button button3;
-    @Nullable
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 

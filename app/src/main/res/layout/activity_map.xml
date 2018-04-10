@@ -28,14 +28,7 @@
 
 
 
-        <Button
-            android:id="@+id/btnpathology"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
 
-            android:onClick="animate"
-            android:text="PA"
-            android:layout_marginLeft="200dp" />
 
 
 

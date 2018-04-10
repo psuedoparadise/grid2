@@ -38,6 +38,8 @@ public class ServiceproviderActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private EditText addr;
     DatabaseReference databaseUsers;
+    private EditText category1;
+    private EditText subcategory1;
 
 
     @Override
@@ -56,6 +58,8 @@ public class ServiceproviderActivity extends AppCompatActivity {
         usrname=(EditText) findViewById(R.id.spname);
         phno=(EditText) findViewById(R.id.spphno);
         addr = (EditText) findViewById(R.id.spaddress);
+        category1=(EditText)findViewById(R.id.category);
+        subcategory1=(EditText)findViewById(R.id.sub_category);
 
         but1 = (Button) findViewById(R.id.buttonsp);
         progressDialog = new ProgressDialog(this);
@@ -163,9 +167,11 @@ public class ServiceproviderActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         //checking if success
                         if (task.isSuccessful()) {
+                            Log.d("----sp","spreg");
                             //display some message here
                             Toast.makeText(ServiceproviderActivity.this, "Successfully registered", Toast.LENGTH_LONG).show();
                             addUser();
+
                             Intent toy2 = new Intent(ServiceproviderActivity.this, Main2Activity.class);
                             startActivity(toy2);
                         } else {
@@ -193,17 +199,33 @@ public class ServiceproviderActivity extends AppCompatActivity {
 
         String Username = usrname.getText().toString().trim();
         String Phonenumber = phno.getText().toString().trim();
-        String Address = usrname.getText().toString().trim();
+        String Address = addr.getText().toString().trim();
         String Spinner =spinner1.getSelectedItem().toString().trim();
         String Email = editTextEmail.getText().toString().trim();
         String Password = editTextPassword.getText().toString().trim();
+        String category=category1.getText().toString().trim();
+        String subcategory=subcategory1.getText().toString().trim();
+        double latitude=72.667;
+        double longitude=34.000;
+
 
         if (!TextUtils.isEmpty(Username) && !TextUtils.isEmpty(Phonenumber) && !TextUtils.isEmpty(Address)) {
 
             String id = databaseUsers.push().getKey();
+            Log.d("-----adduser",""+id);
+//            ServiceProviderInformation serviceproviders= new ServiceProviderInformation();
+//            serviceproviders.setUsername(Username);
+//            serviceproviders.setPhonenumber(Phonenumber);
+//            serviceproviders.setPassword(Password);
+//            serviceproviders.setAddress(Address);
+//            serviceproviders.setSpinner(Spinner);
+//            serviceproviders.setEmail(Email);
+//            serviceproviders.setCategory(category);
+//            serviceproviders.setSubcategory(subcategory);serviceproviders.setLatitude(latitude);
+//           serviceproviders.setLongitude(longitude);
 
-            ServiceProviderInformation serviceproviders = new ServiceProviderInformation(Username, Address,Email, Password, Phonenumber, Spinner );
-
+            ServiceProviderInformation serviceproviders = new ServiceProviderInformation(Username, Address,Email, Password, Phonenumber, Spinner,category,subcategory ,latitude,longitude);
+            Log.d("-----adduser","sprovider"+id);
             databaseUsers.child(id).setValue(serviceproviders);
         }
     }
