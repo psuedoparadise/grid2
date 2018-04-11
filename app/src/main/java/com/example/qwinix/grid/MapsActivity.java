@@ -50,9 +50,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     SharedPreferences mPref;
     String spinnerval,categoryval,gridval;
     private DatabaseReference mDatabase;
-    private String Username,Addresss,Email,Password,Phonenumber,Spinner,category,subcategory;
-    ArrayList<ServiceProviderInformation> mProvider,mSortlist;
-    double latitude,longitude;
+   // public static Object ServiceProviderInformation;
+    private int Default_radius=8000;
+    ArrayList<ServiceProviderInformation> mProvider=new ArrayList<ServiceProviderInformation>();
+    private ArrayList<String> mkeys= new ArrayList<>();
+    private LatLng newlocation;
+    private LatLng latLng1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +101,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+      Log.d("--map","common");
         mMap = googleMap;
 
 
@@ -115,114 +120,187 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mDatabase = (DatabaseReference) FirebaseDatabase.getInstance().getReference().child("ServiceProviderInformation");
         mDatabase.keepSynced(true);
-       mDatabase.addChildEventListener(new ChildEventListener() {
+        mDatabase.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                double distance=0;
 
-                 for(DataSnapshot Snapshot : dataSnapshot.getChildren()) {
-                     //ServiceProviderInformation user=Snapshot.getValue(ServiceProviderInformation.class);
-                     //String user1=dataSnapshot.child("latitude").getValue().toString();
-                     //String user2=dataSnapshot.child("latitude").getValue().toString();
-                     if (spinnerval.equalsIgnoreCase("doctor") && dataSnapshot.child("Spinner").getValue().toString().equalsIgnoreCase(spinnerval)) {
-                         if (categoryval.equalsIgnoreCase("allopathy") && dataSnapshot.child("category").getValue().toString().equalsIgnoreCase(categoryval)) {
-                             if (gridval.equalsIgnoreCase("orthopaedic") && dataSnapshot.child("subcategory").getValue().toString().equalsIgnoreCase(gridval)) {
+
+                for (DataSnapshot Snapshot : dataSnapshot.getChildren()) {
+                    //ServiceProviderInformation user=Snapshot.getValue(ServiceProviderInformation.class);
+                    //String user1=dataSnapshot.child("latitude").getValue().toString();
+                    //String user2=dataSnapshot.child("latitude").getValue().toString();
+                    if (spinnerval.equalsIgnoreCase("doctor") && dataSnapshot.child("Spinner").getValue().toString().equalsIgnoreCase(spinnerval)) {
+                        if (categoryval.equalsIgnoreCase("allopathy") && dataSnapshot.child("category").getValue().toString().equalsIgnoreCase(categoryval)) {
+                            if (gridval.equalsIgnoreCase("orthopaedic") && dataSnapshot.child("subcategory").getValue().toString().equalsIgnoreCase(gridval)) {
 //                            Log.d("mathew", "" + prov.getPhonenumber());
 //                            Log.d("mathew", "" + prov.getUsername());
-                                 LatLng newlocation = new LatLng(dataSnapshot.child("latitude").getValue(double.class), dataSnapshot.child("longitude").getValue(double.class));
+                                newlocation = new LatLng(dataSnapshot.child("latitude").getValue(double.class), dataSnapshot.child("longitude").getValue(double.class));
 
-                                 Log.d("----sony", "" + newlocation);
+                                Log.d("----sony", "" + newlocation);
+                                double check = markerreturn(distance);
+                                Log.d("---plss", "come");
+                                if (check < Default_radius) {
 
 
-                                 mMap.addMarker(new MarkerOptions().position(newlocation).title(dataSnapshot.getKey()));
-                             } else if (gridval.equalsIgnoreCase("diabetician") && dataSnapshot.child("subcategory").getValue().toString().equalsIgnoreCase(gridval)) {
+                                    mMap.addMarker(new MarkerOptions().position(newlocation).title(dataSnapshot.getKey()));
+                                }
+                            } else if (gridval.equalsIgnoreCase("diabetician") && dataSnapshot.child("subcategory").getValue().toString().equalsIgnoreCase(gridval)) {
 //                            Log.d("mathew", "" + prov.getUsername());
 //                            Log.d("mathew", "" + prov.getPhonenumber());
-                                 LatLng newlocation = new LatLng(dataSnapshot.child("latitude").getValue(double.class), dataSnapshot.child("longitude").getValue(double.class));
+                                newlocation = new LatLng(dataSnapshot.child("latitude").getValue(double.class), dataSnapshot.child("longitude").getValue(double.class));
 
-                                 Log.d("----sony", "" + newlocation);
+                                Log.d("----sony", "" + newlocation);
+
+                                double check = markerreturn(distance);
+                                Log.d("radii",""+check);
+                                if (check < Default_radius) {
 
 
-                                 mMap.addMarker(new MarkerOptions().position(newlocation).title(dataSnapshot.getKey()));
-                             } else if (gridval.equalsIgnoreCase("gynocologist") && dataSnapshot.child("subcategory").getValue().toString().equalsIgnoreCase(gridval)) {
+                                    mMap.addMarker(new MarkerOptions().position(newlocation).title(dataSnapshot.getKey()));
+                                }
+
+
+                            } else if (gridval.equalsIgnoreCase("gynocologist") && dataSnapshot.child("subcategory").getValue().toString().equalsIgnoreCase(gridval)) {
 //                            Log.d("mathew", "" + prov.getUsername());
 //                            Log.d("mathew", "" + prov.getPhonenumber());
-                                 LatLng newlocation = new LatLng(dataSnapshot.child("latitude").getValue(double.class), dataSnapshot.child("longitude").getValue(double.class));
+                                newlocation = new LatLng(dataSnapshot.child("latitude").getValue(double.class), dataSnapshot.child("longitude").getValue(double.class));
 
-                                 Log.d("----sony", "" + newlocation);
+                                Log.d("----sony", "" + newlocation);
 
 
-                                 mMap.addMarker(new MarkerOptions().position(newlocation).title(dataSnapshot.getKey()));
-                             } else if (gridval.equalsIgnoreCase("general") && dataSnapshot.child("subcategory").getValue().toString().equalsIgnoreCase(gridval)) {
+
+                                double check = markerreturn(distance);
+                                if (check < Default_radius) {
+
+
+                                    mMap.addMarker(new MarkerOptions().position(newlocation).title(dataSnapshot.getKey()));
+                                }
+                            } else if (gridval.equalsIgnoreCase("general") && dataSnapshot.child("subcategory").getValue().toString().equalsIgnoreCase(gridval)) {
 //                            Log.d("mathew", "" + prov.getUsername());
 //                            Log.d("mathew", "" + prov.getPhonenumber());
-                                 LatLng newlocation = new LatLng(dataSnapshot.child("latitude").getValue(double.class), dataSnapshot.child("longitude").getValue(double.class));
+                                newlocation = new LatLng(dataSnapshot.child("latitude").getValue(double.class), dataSnapshot.child("longitude").getValue(double.class));
 
-                                 Log.d("----sony", "" + newlocation);
+                                Log.d("----sony", "" + newlocation);
 
 
-                                 mMap.addMarker(new MarkerOptions().position(newlocation).title(dataSnapshot.getKey()));
-                             } else if (gridval.equalsIgnoreCase("neurology") && dataSnapshot.child("subcategory").getValue().toString().equalsIgnoreCase(gridval)) {
+
+                                double check = markerreturn(distance);
+                                if (check < Default_radius) {
+
+
+                                    mMap.addMarker(new MarkerOptions().position(newlocation).title(dataSnapshot.getKey()));
+                                }
+                            } else if (gridval.equalsIgnoreCase("neurology") && dataSnapshot.child("subcategory").getValue().toString().equalsIgnoreCase(gridval)) {
 //                            Log.d("mathew", "" + prov.getUsername());
-//                            Log.d("mathew", "" + prov.getPhonenumber());
-                                 LatLng newlocation = new LatLng(dataSnapshot.child("latitude").getValue(double.class), dataSnapshot.child("longitude").getValue(double.class));
-                             }
-                         } else if (categoryval.equalsIgnoreCase("ayurvedic") && dataSnapshot.child("category").getValue().toString().equalsIgnoreCase(categoryval)) {
+//                            Log.d("mathew", "" + prov.getPhonenumber())
+                                newlocation = new LatLng(dataSnapshot.child("latitude").getValue(double.class), dataSnapshot.child("longitude").getValue(double.class));
+
+                                double check = markerreturn(distance);
+                                if (check < Default_radius) {
+
+
+                                    mMap.addMarker(new MarkerOptions().position(newlocation).title(dataSnapshot.getKey()));
+                                }
+                            }
+                        } else if (categoryval.equalsIgnoreCase("ayurvedic") && dataSnapshot.child("category").getValue().toString().equalsIgnoreCase(categoryval)) {
 //                        Log.d("mathew", "" + prov.getUsername());
 //                        Log.d("mathew", "" + prov.getPhonenumber());
-                             LatLng newlocation = new LatLng(dataSnapshot.child("latitude").getValue(double.class), dataSnapshot.child("longitude").getValue(double.class));
-                             Log.d("----sony", "" + newlocation);
+                            newlocation = new LatLng(dataSnapshot.child("latitude").getValue(double.class), dataSnapshot.child("longitude").getValue(double.class));
+
+                            Log.d("----sony", "" + newlocation);
 
 
-                             mMap.addMarker(new MarkerOptions().position(newlocation).title(dataSnapshot.getKey()));
-                         } else if (categoryval.equalsIgnoreCase("homeopathy") && dataSnapshot.child("category").getValue().toString().equalsIgnoreCase(categoryval)) {
+                            double check = markerreturn(distance);
+                            if (check < Default_radius) {
+
+
+                                mMap.addMarker(new MarkerOptions().position(newlocation).title(dataSnapshot.getKey()));
+                            }
+                        } else if (categoryval.equalsIgnoreCase("homeopathy") && dataSnapshot.child("category").getValue().toString().equalsIgnoreCase(categoryval)) {
 //                        Log.d("mathew", "" + prov.getUsername());
 //                        Log.d("mathew", "" + prov.getPhonenumber());
-                             LatLng newlocation = new LatLng(dataSnapshot.child("latitude").getValue(double.class), dataSnapshot.child("longitude").getValue(double.class));
-
-                             Log.d("----sony", "" + newlocation);
+                            newlocation = new LatLng(dataSnapshot.child("latitude").getValue(double.class), dataSnapshot.child("longitude").getValue(double.class));
 
 
-                             mMap.addMarker(new MarkerOptions().position(newlocation).title(dataSnapshot.getKey()));
-                         }
-                     } else if (spinnerval.equalsIgnoreCase("pharmacy") && dataSnapshot.child("Spinner").getValue().toString().equalsIgnoreCase(spinnerval)) {
+                            Log.d("----sony", "" + newlocation);
+
+
+                            double check = markerreturn( distance);
+                            if (check < Default_radius) {
+
+
+                                mMap.addMarker(new MarkerOptions().position(newlocation).title(dataSnapshot.getKey()));
+                            }
+                        }
+                    } else if (spinnerval.equalsIgnoreCase("pharmacy") && dataSnapshot.child("Spinner").getValue().toString().equalsIgnoreCase(spinnerval)) {
 //                        Log.d("mathew", "" + prov.getUsername());
 //                        Log.d("mathew", "" + prov.getPhonenumber());
-                         LatLng newlocation = new LatLng(dataSnapshot.child("latitude").getValue(double.class), dataSnapshot.child("longitude").getValue(double.class));
+                        newlocation = new LatLng(dataSnapshot.child("latitude").getValue(double.class), dataSnapshot.child("longitude").getValue(double.class));
 
-                         Log.d("----sony", "" + newlocation);
+                        Log.d("----sony", "" + newlocation);
 
 
-                         mMap.addMarker(new MarkerOptions().position(newlocation).title(dataSnapshot.getKey()));
-                     } else if (spinnerval.equalsIgnoreCase("pathology") && dataSnapshot.child("Spinner").getValue().toString().equalsIgnoreCase(spinnerval)) {
+
+                        double check = markerreturn(distance);
+                        if (check < Default_radius) {
+
+
+                            mMap.addMarker(new MarkerOptions().position(newlocation).title(dataSnapshot.getKey()));
+                        }
+                    } else if (spinnerval.equalsIgnoreCase("pathology") && dataSnapshot.child("Spinner").getValue().toString().equalsIgnoreCase(spinnerval)) {
 //                        Log.d("mathew", "" + prov.getUsername());
 //                        Log.d("mathew", "" + prov.getPhonenumber());
-                         LatLng newlocation = new LatLng(dataSnapshot.child("latitude").getValue(double.class), dataSnapshot.child("longitude").getValue(double.class));
+                        newlocation = new LatLng(dataSnapshot.child("latitude").getValue(double.class), dataSnapshot.child("longitude").getValue(double.class));
 
-                         Log.d("----sony", "" + newlocation);
+                        Log.d("----sony", "" + newlocation);
 
 
-                         mMap.addMarker(new MarkerOptions().position(newlocation).title(dataSnapshot.getKey()));
-                     } else if (spinnerval.equalsIgnoreCase("ambulance") && dataSnapshot.child("Spinner").getValue().toString().equalsIgnoreCase(spinnerval)) {
+
+                        double check = markerreturn(distance);
+                        if (check < Default_radius) {
+
+
+                            mMap.addMarker(new MarkerOptions().position(newlocation).title(dataSnapshot.getKey()));
+                        }
+                    } else if (spinnerval.equalsIgnoreCase("ambulance") && dataSnapshot.child("Spinner").getValue().toString().equalsIgnoreCase(spinnerval)) {
 //                        Log.d("mathew", "" + prov.getUsername());
 //                        Log.d("mathew", "" + prov.getPhonenumber());
-                         LatLng newlocation = new LatLng(dataSnapshot.child("latitude").getValue(double.class), dataSnapshot.child("longitude").getValue(double.class));
+                        newlocation = new LatLng(dataSnapshot.child("latitude").getValue(double.class), dataSnapshot.child("longitude").getValue(double.class));
 
-                         Log.d("----sony", "" + newlocation);
-
-
-                         mMap.addMarker(new MarkerOptions().position(newlocation).title(dataSnapshot.getKey()));
-                     } else if ("spnnnerval".equalsIgnoreCase("bloodbank") && dataSnapshot.child("Spinner").getValue().toString().equalsIgnoreCase(spinnerval)) {
-                         LatLng newlocation = new LatLng(dataSnapshot.child("latitude").getValue(double.class), dataSnapshot.child("longitude").getValue(double.class));
-
-                         Log.d("----sony", "" + newlocation);
+                        Log.d("----sony", "" + newlocation);
 
 
-                         mMap.addMarker(new MarkerOptions().position(newlocation).title(dataSnapshot.getKey()));
-                     }
-                 }
-                 String key= dataSnapshot.getKey();
-                 //mkeys.add(key);
 
+                        double check = markerreturn(distance);
+                        Log.d("-ambu","lance"+check);
+                        if (check < Default_radius) {
+                            Log.d("-----ambu","lance");
+
+
+
+
+                            mMap.addMarker(new MarkerOptions().position(newlocation).title(dataSnapshot.getKey()));
+                        }
+                    } else if (spinnerval.equalsIgnoreCase("bloodbank") && dataSnapshot.child("Spinner").getValue().toString().equalsIgnoreCase(spinnerval)) {
+                        newlocation = new LatLng(dataSnapshot.child("latitude").getValue(double.class), dataSnapshot.child("longitude").getValue(double.class));
+
+                        Log.d("----sony", "" + newlocation);
+
+
+
+                        double check = markerreturn(distance);
+                        if (check < Default_radius) {
+
+
+                            mMap.addMarker(new MarkerOptions().position(newlocation).title(dataSnapshot.getKey()));
+                        }
+                    }
+                }
+                String key = dataSnapshot.getKey();
+                mkeys.add(key);
+                String value=dataSnapshot.child("Username").getValue().toString();
+                Log.d("user",""+value);
 
 
             }
@@ -235,19 +313,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                String value=dataSnapshot.getValue().toString();
-                String key=dataSnapshot.getKey();
-                //int index=mkeys.indexOf(key);
+                String value = dataSnapshot.getValue().toString();
+                String key = dataSnapshot.getKey();
+                int index = mkeys.indexOf(key);
+              Log.d("child","childdd"+dataSnapshot.child("latitude").getValue().toString());
+;
                 //mProvider.set(index,value);
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                String value=dataSnapshot.getValue().toString();
-                String key=dataSnapshot.getKey();
-                //int index=mkeys.indexOf(key);
-            }
-
+                String value = dataSnapshot.getValue().toString();
+                String key = dataSnapshot.getKey();
+                int index = mkeys.indexOf(key);
+         Log.d("rem","remove"+dataSnapshot.getValue().toString());
+}
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
             }
@@ -259,7 +339,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
     }
 
+        public double markerreturn(double distance) {
+            Location locationA = new Location("POINT A");
+            locationA.setLatitude(latLng1.latitude);
+            locationA.setLongitude(latLng1.longitude);
+            Location locationB = new Location("POINT B");
+            locationB.setLatitude(newlocation.latitude);
+            locationB.setLongitude(newlocation.longitude);
+            distance = locationA.distanceTo(locationB);
+        Log.d("--dayavittu","baa"+distance);
 
+        return distance;
+        }
 
     protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -274,8 +365,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onConnected(Bundle bundle) {
 
         mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(10000);
-        mLocationRequest.setFastestInterval(10000);
+        mLocationRequest.setInterval(0);
+        mLocationRequest.setFastestInterval(0);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
@@ -299,16 +390,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         //Place current location marker
-        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        latLng1 = new LatLng(location.getLatitude(), location.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions();
         Geocoder geocoder = new Geocoder(getApplicationContext());
-        markerOptions.position(latLng);
+        markerOptions.position(latLng1);
         markerOptions.title("Current Position");
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
         mCurrLocationMarker = mMap.addMarker(markerOptions);
 
         //move map camera
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng1));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
 
 
