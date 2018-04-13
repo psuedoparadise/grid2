@@ -45,17 +45,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     GoogleApiClient mGoogleApiClient;
     Location mLastLocation;
+
     Marker mCurrLocationMarker;
     LocationRequest mLocationRequest;
     SharedPreferences mPref;
     String spinnerval,categoryval,gridval;
     private DatabaseReference mDatabase;
-   // public static Object ServiceProviderInformation;
+    // public static Object ServiceProviderInformation;
     private int Default_radius=8000;
     ArrayList<ServiceProviderInformation> mProvider=new ArrayList<ServiceProviderInformation>();
     private ArrayList<String> mkeys= new ArrayList<>();
     private LatLng newlocation;
     private LatLng latLng1;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +84,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
+
 //    private void getsortedlist() {
 //        for (ServiceProviderInformation prov : mProvider) {
 //
@@ -99,10 +102,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
-      Log.d("--map","common");
-        mMap = googleMap;
+        mMap=googleMap;
+
 
 
         //Initialize Google Play Services
@@ -120,21 +124,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mDatabase = (DatabaseReference) FirebaseDatabase.getInstance().getReference().child("ServiceProviderInformation");
         mDatabase.keepSynced(true);
+
         mDatabase.addChildEventListener(new ChildEventListener() {
+
             @Override
+
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 double distance=0;
 
 
                 for (DataSnapshot Snapshot : dataSnapshot.getChildren()) {
+
                     //ServiceProviderInformation user=Snapshot.getValue(ServiceProviderInformation.class);
                     //String user1=dataSnapshot.child("latitude").getValue().toString();
                     //String user2=dataSnapshot.child("latitude").getValue().toString();
                     if (spinnerval.equalsIgnoreCase("doctor") && dataSnapshot.child("Spinner").getValue().toString().equalsIgnoreCase(spinnerval)) {
+
                         if (categoryval.equalsIgnoreCase("allopathy") && dataSnapshot.child("category").getValue().toString().equalsIgnoreCase(categoryval)) {
+                            Log.d("---maps","come");
+
                             if (gridval.equalsIgnoreCase("orthopaedic") && dataSnapshot.child("subcategory").getValue().toString().equalsIgnoreCase(gridval)) {
 //                            Log.d("mathew", "" + prov.getPhonenumber());
-//                            Log.d("mathew", "" + prov.getUsername());
+                               Log.d("mathew", "there");
                                 newlocation = new LatLng(dataSnapshot.child("latitude").getValue(double.class), dataSnapshot.child("longitude").getValue(double.class));
 
                                 Log.d("----sony", "" + newlocation);
@@ -145,7 +156,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                                     mMap.addMarker(new MarkerOptions().position(newlocation).title(dataSnapshot.getKey()));
                                 }
-                            } else if (gridval.equalsIgnoreCase("diabetician") && dataSnapshot.child("subcategory").getValue().toString().equalsIgnoreCase(gridval)) {
+                            }
+                            else if (gridval.equalsIgnoreCase("diabetician") && dataSnapshot.child("subcategory").getValue().toString().equalsIgnoreCase(gridval)) {
 //                            Log.d("mathew", "" + prov.getUsername());
 //                            Log.d("mathew", "" + prov.getPhonenumber());
                                 newlocation = new LatLng(dataSnapshot.child("latitude").getValue(double.class), dataSnapshot.child("longitude").getValue(double.class));
@@ -161,7 +173,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 }
 
 
-                            } else if (gridval.equalsIgnoreCase("gynocologist") && dataSnapshot.child("subcategory").getValue().toString().equalsIgnoreCase(gridval)) {
+                            }
+                            else if (gridval.equalsIgnoreCase("gynocologist") && dataSnapshot.child("subcategory").getValue().toString().equalsIgnoreCase(gridval)) {
 //                            Log.d("mathew", "" + prov.getUsername());
 //                            Log.d("mathew", "" + prov.getPhonenumber());
                                 newlocation = new LatLng(dataSnapshot.child("latitude").getValue(double.class), dataSnapshot.child("longitude").getValue(double.class));
@@ -176,7 +189,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                                     mMap.addMarker(new MarkerOptions().position(newlocation).title(dataSnapshot.getKey()));
                                 }
-                            } else if (gridval.equalsIgnoreCase("general") && dataSnapshot.child("subcategory").getValue().toString().equalsIgnoreCase(gridval)) {
+                            }
+                            else if (gridval.equalsIgnoreCase("general") && dataSnapshot.child("subcategory").getValue().toString().equalsIgnoreCase(gridval)) {
 //                            Log.d("mathew", "" + prov.getUsername());
 //                            Log.d("mathew", "" + prov.getPhonenumber());
                                 newlocation = new LatLng(dataSnapshot.child("latitude").getValue(double.class), dataSnapshot.child("longitude").getValue(double.class));
@@ -191,7 +205,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                                     mMap.addMarker(new MarkerOptions().position(newlocation).title(dataSnapshot.getKey()));
                                 }
-                            } else if (gridval.equalsIgnoreCase("neurology") && dataSnapshot.child("subcategory").getValue().toString().equalsIgnoreCase(gridval)) {
+                            }
+                            else if (gridval.equalsIgnoreCase("neurology") && dataSnapshot.child("subcategory").getValue().toString().equalsIgnoreCase(gridval)) {
 //                            Log.d("mathew", "" + prov.getUsername());
 //                            Log.d("mathew", "" + prov.getPhonenumber())
                                 newlocation = new LatLng(dataSnapshot.child("latitude").getValue(double.class), dataSnapshot.child("longitude").getValue(double.class));
@@ -203,7 +218,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     mMap.addMarker(new MarkerOptions().position(newlocation).title(dataSnapshot.getKey()));
                                 }
                             }
-                        } else if (categoryval.equalsIgnoreCase("ayurvedic") && dataSnapshot.child("category").getValue().toString().equalsIgnoreCase(categoryval)) {
+                        }
+                        else if (categoryval.equalsIgnoreCase("ayurvedic") && dataSnapshot.child("category").getValue().toString().equalsIgnoreCase(categoryval)) {
 //                        Log.d("mathew", "" + prov.getUsername());
 //                        Log.d("mathew", "" + prov.getPhonenumber());
                             newlocation = new LatLng(dataSnapshot.child("latitude").getValue(double.class), dataSnapshot.child("longitude").getValue(double.class));
@@ -217,7 +233,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                                 mMap.addMarker(new MarkerOptions().position(newlocation).title(dataSnapshot.getKey()));
                             }
-                        } else if (categoryval.equalsIgnoreCase("homeopathy") && dataSnapshot.child("category").getValue().toString().equalsIgnoreCase(categoryval)) {
+                        }
+                        else if (categoryval.equalsIgnoreCase("homeopathy") && dataSnapshot.child("category").getValue().toString().equalsIgnoreCase(categoryval)) {
 //                        Log.d("mathew", "" + prov.getUsername());
 //                        Log.d("mathew", "" + prov.getPhonenumber());
                             newlocation = new LatLng(dataSnapshot.child("latitude").getValue(double.class), dataSnapshot.child("longitude").getValue(double.class));
@@ -233,7 +250,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 mMap.addMarker(new MarkerOptions().position(newlocation).title(dataSnapshot.getKey()));
                             }
                         }
-                    } else if (spinnerval.equalsIgnoreCase("pharmacy") && dataSnapshot.child("Spinner").getValue().toString().equalsIgnoreCase(spinnerval)) {
+                    }
+                    else if (spinnerval.equalsIgnoreCase("pharmacy") && dataSnapshot.child("Spinner").getValue().toString().equalsIgnoreCase(spinnerval)) {
 //                        Log.d("mathew", "" + prov.getUsername());
 //                        Log.d("mathew", "" + prov.getPhonenumber());
                         newlocation = new LatLng(dataSnapshot.child("latitude").getValue(double.class), dataSnapshot.child("longitude").getValue(double.class));
@@ -248,7 +266,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                             mMap.addMarker(new MarkerOptions().position(newlocation).title(dataSnapshot.getKey()));
                         }
-                    } else if (spinnerval.equalsIgnoreCase("pathology") && dataSnapshot.child("Spinner").getValue().toString().equalsIgnoreCase(spinnerval)) {
+                    }
+                    else if (spinnerval.equalsIgnoreCase("pathology") && dataSnapshot.child("Spinner").getValue().toString().equalsIgnoreCase(spinnerval)) {
 //                        Log.d("mathew", "" + prov.getUsername());
 //                        Log.d("mathew", "" + prov.getPhonenumber());
                         newlocation = new LatLng(dataSnapshot.child("latitude").getValue(double.class), dataSnapshot.child("longitude").getValue(double.class));
@@ -263,7 +282,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                             mMap.addMarker(new MarkerOptions().position(newlocation).title(dataSnapshot.getKey()));
                         }
-                    } else if (spinnerval.equalsIgnoreCase("ambulance") && dataSnapshot.child("Spinner").getValue().toString().equalsIgnoreCase(spinnerval)) {
+                    }
+                    else if (spinnerval.equalsIgnoreCase("ambulance") && dataSnapshot.child("Spinner").getValue().toString().equalsIgnoreCase(spinnerval)) {
 //                        Log.d("mathew", "" + prov.getUsername());
 //                        Log.d("mathew", "" + prov.getPhonenumber());
                         newlocation = new LatLng(dataSnapshot.child("latitude").getValue(double.class), dataSnapshot.child("longitude").getValue(double.class));
@@ -282,7 +302,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                             mMap.addMarker(new MarkerOptions().position(newlocation).title(dataSnapshot.getKey()));
                         }
-                    } else if (spinnerval.equalsIgnoreCase("bloodbank") && dataSnapshot.child("Spinner").getValue().toString().equalsIgnoreCase(spinnerval)) {
+                    }
+                    else if (spinnerval.equalsIgnoreCase("bloodbank") && dataSnapshot.child("Spinner").getValue().toString().equalsIgnoreCase(spinnerval)) {
                         newlocation = new LatLng(dataSnapshot.child("latitude").getValue(double.class), dataSnapshot.child("longitude").getValue(double.class));
 
                         Log.d("----sony", "" + newlocation);
@@ -316,8 +337,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 String value = dataSnapshot.getValue().toString();
                 String key = dataSnapshot.getKey();
                 int index = mkeys.indexOf(key);
-              Log.d("child","childdd"+dataSnapshot.child("latitude").getValue().toString());
-;
+                Log.d("child","childdd"+dataSnapshot.child("latitude").getValue().toString());
+                ;
                 //mProvider.set(index,value);
             }
 
@@ -326,8 +347,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 String value = dataSnapshot.getValue().toString();
                 String key = dataSnapshot.getKey();
                 int index = mkeys.indexOf(key);
-         Log.d("rem","remove"+dataSnapshot.getValue().toString());
-}
+                Log.d("rem","remove"+dataSnapshot.getValue().toString());
+            }
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
             }
@@ -339,20 +360,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
     }
 
-        public double markerreturn(double distance) {
-            Location locationA = new Location("POINT A");
-            locationA.setLatitude(latLng1.latitude);
-            locationA.setLongitude(latLng1.longitude);
-            Location locationB = new Location("POINT B");
-            locationB.setLatitude(newlocation.latitude);
-            locationB.setLongitude(newlocation.longitude);
-            distance = locationA.distanceTo(locationB);
+    public double markerreturn(double distance) {
+        Location locationA = new Location("POINT A");
+        locationA.setLatitude(latLng1.latitude);
+        locationA.setLongitude(latLng1.longitude);
+        Location locationB = new Location("POINT B");
+        locationB.setLatitude(newlocation.latitude);
+        locationB.setLongitude(newlocation.longitude);
+        distance = locationA.distanceTo(locationB);
         Log.d("--dayavittu","baa"+distance);
 
         return distance;
-        }
+    }
 
     protected synchronized void buildGoogleApiClient() {
+        Log.d("--map","common");
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -374,6 +396,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
         }
 
+
+
     }
 
     @Override
@@ -383,6 +407,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onLocationChanged(Location location) {
+
 
         mLastLocation = location;
         if (mCurrLocationMarker != null) {
@@ -416,7 +441,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 10000;
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 100000;
     public boolean checkLocationPermission(){
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)

@@ -35,10 +35,10 @@ public class androidgridlayoutactivity extends Activity {
                 Log.d("---i","pos");
                 intent.putExtra("KEY_BONE","bone");
                 startActivity(intent);*/
-        // Sending image id to FullScreenActivity
+                // Sending image id to FullScreenActivity
 
 
-                 Intent intent=null ;
+                Intent intent=null ;
 
                 // passing array index
 
@@ -122,16 +122,6 @@ public class androidgridlayoutactivity extends Activity {
 
     }
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
