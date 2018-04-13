@@ -57,7 +57,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ArrayList<String> mkeys= new ArrayList<>();
     private LatLng newlocation;
     private LatLng latLng1;
-    
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
